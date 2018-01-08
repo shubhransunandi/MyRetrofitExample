@@ -8,7 +8,6 @@ import com.google.gson.annotations.SerializedName;
 
 public class MyDTOpojo {
 
-
     @SerializedName("productid")
     private String productid;
     @SerializedName("productname")
