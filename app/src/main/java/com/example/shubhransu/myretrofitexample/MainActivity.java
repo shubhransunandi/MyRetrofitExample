@@ -25,8 +25,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        result= (TextView) findViewById(R.id.result);
-        pb= (ProgressBar) findViewById(R.id.progressBar);
+        result= findViewById(R.id.result);
+        pb= findViewById(R.id.progressBar);
 
         apiinterface = ApiClient.getApiClient().create(ApiInterface.class);
         Call<StudentDetails> call = apiinterface.getDetailsOfStudent();
