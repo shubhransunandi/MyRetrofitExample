@@ -1,12 +1,15 @@
 package Model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by Shubhransu on 08-Jan-18.
  */
 
-public class MyDTOpojo {
+public class MyDTOpojo implements Parcelable {
 
     @SerializedName("productid")
     private String productid;
@@ -78,4 +81,45 @@ public class MyDTOpojo {
     public void setImageurl(String imageurl) {
         this.imageurl = imageurl;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.productname);
+        dest.writeString(this.productid);
+        dest.writeString(this.price);
+        dest.writeString(this.instock);
+        dest.writeString(this.offer);
+        dest.writeString(this.color);
+        dest.writeString(this.imageurl);
+    }
+
+    public MyDTOpojo() {
+    }
+
+    protected MyDTOpojo(Parcel in) {
+        this.productname = in.readString();
+        this.productid = in.readString();
+        this.price = in.readString();
+        this.instock = in.readString();
+        this.offer = in.readString();
+        this.color = in.readString();
+        this.imageurl = in.readString();
+    }
+
+    public static final Parcelable.Creator<MyDTOpojo> CREATOR = new Parcelable.Creator<MyDTOpojo>() {
+        @Override
+        public MyDTOpojo createFromParcel(Parcel source) {
+            return new MyDTOpojo(source);
+        }
+
+        @Override
+        public MyDTOpojo[] newArray(int size) {
+            return new MyDTOpojo[size];
+        }
+    };
 }
