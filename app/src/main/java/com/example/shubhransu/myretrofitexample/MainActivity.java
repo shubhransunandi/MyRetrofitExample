@@ -43,9 +43,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "Sundargarh", Toast.LENGTH_SHORT).show();
                 Toast.makeText(MainActivity.this, "Staying at Banglore", Toast.LENGTH_SHORT).show();
 
-                
-
-            }
+                }
 
             @Override
             public void onFailure(Call<StudentDetails> call, Throwable t) {
