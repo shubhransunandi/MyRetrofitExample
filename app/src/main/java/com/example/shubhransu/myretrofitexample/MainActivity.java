@@ -37,7 +37,9 @@ public class MainActivity extends AppCompatActivity {
                 pb.setVisibility(View.GONE);
                 result.setVisibility(View.VISIBLE);
                 StudentDetails students = response.body();
-                result.setText(students.toString());
+                if(students!=null) {
+                    result.setText(students.toString());
+                }
                 Toast.makeText(MainActivity.this, "Job is Successfull", Toast.LENGTH_SHORT).show();
                 Toast.makeText(MainActivity.this, "Rourkela is my hometown", Toast.LENGTH_SHORT).show();
                 Toast.makeText(MainActivity.this, "Sundargarh", Toast.LENGTH_SHORT).show();
