@@ -67,15 +67,15 @@ public class ArchiveTemp{
 
 	@Override
  	public String toString(){
-		return 
-			"ArchiveTemp{" + 
-			"reasonName = '" + reasonName + '\'' + 
-			",itemId = '" + itemId + '\'' + 
-			",itemName = '" + itemName + '\'' + 
-			",archivedOn = '" + archivedOn + '\'' + 
-			",reasonId = '" + reasonId + '\'' + 
-			",imageUrl = '" + imageUrl + '\'' + 
-			",userId = '" + userId + '\'' + 
+		return
+			"ArchiveTemp{" +
+			"reasonName = '" + reasonName + '\'' +
+			",itemId = '" + itemId + '\'' +
+			",itemName = '" + itemName + '\'' +
+			",archivedOn = '" + archivedOn + '\'' +
+			",reasonId = '" + reasonId + '\'' +
+			",imageUrl = '" + imageUrl + '\'' +
+			",userId = '" + userId + '\'' +
 			"}";
 		}
 }
