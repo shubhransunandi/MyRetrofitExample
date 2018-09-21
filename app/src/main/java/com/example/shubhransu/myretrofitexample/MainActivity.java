@@ -1,5 +1,6 @@
 package com.example.shubhransu.myretrofitexample;
 
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -33,11 +34,11 @@ public class MainActivity extends AppCompatActivity {
 
         call.enqueue(new Callback<StudentDetails>() {
             @Override
-            public void onResponse(Call<StudentDetails> call, Response<StudentDetails> response) {
+            public void onResponse(@NonNull Call<StudentDetails> call, @NonNull Response<StudentDetails> response) {
                 pb.setVisibility(View.GONE);
                 result.setVisibility(View.VISIBLE);
                 StudentDetails students = response.body();
-                result.setText(students.toString());
+                result.setText(students != null ? students.toString() : null);
                 /*Toast.makeText(MainActivity.this, "Job is Successfull", Toast.LENGTH_SHORT).show();
                 Toast.makeText(MainActivity.this, "Rourkela is my hometown", Toast.LENGTH_SHORT).show();
                 Toast.makeText(MainActivity.this, "Sundargarh", Toast.LENGTH_SHORT).show();
@@ -48,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<StudentDetails> call, Throwable t) {
+            public void onFailure(@NonNull Call<StudentDetails> call, Throwable t) {
                 Toast.makeText(MainActivity.this, "There is an Error", Toast.LENGTH_SHORT).show();
             }
         });
