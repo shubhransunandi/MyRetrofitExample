@@ -3,6 +3,7 @@ package ApiConfig;
 import java.util.List;
 
 import Model.StudentDetails;
+import io.reactivex.Observable;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -15,6 +16,6 @@ import retrofit2.http.POST;
 
 public interface ApiInterface {
 
-    @GET("RetrofitAndroidObjectResponse")
-    Call<StudentDetails> getDetailsOfStudent();
+    @GET("RetrofitAndroidArrayResponse")
+    Observable<List<StudentDetails>> getDetailsOfStudent();
 }

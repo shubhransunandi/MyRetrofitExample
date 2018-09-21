@@ -7,9 +7,16 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.List;
+
 import ApiConfig.ApiClient;
 import ApiConfig.ApiInterface;
 import Model.StudentDetails;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -26,33 +33,35 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        result= findViewById(R.id.result);
-        pb= findViewById(R.id.progressBar);
+        result = findViewById(R.id.result);
+        pb = findViewById(R.id.progressBar);
 
         apiinterface = ApiClient.getApiClient().create(ApiInterface.class);
-        Call<StudentDetails> call = apiinterface.getDetailsOfStudent();
+        apiinterface.getDetailsOfStudent()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<List<StudentDetails>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
 
-        call.enqueue(new Callback<StudentDetails>() {
-            @Override
-            public void onResponse(@NonNull Call<StudentDetails> call, @NonNull Response<StudentDetails> response) {
-                pb.setVisibility(View.GONE);
-                result.setVisibility(View.VISIBLE);
-                StudentDetails students = response.body();
-                result.setText(students != null ? students.toString() : null);
-                /*Toast.makeText(MainActivity.this, "Job is Successfull", Toast.LENGTH_SHORT).show();
-                Toast.makeText(MainActivity.this, "Rourkela is my hometown", Toast.LENGTH_SHORT).show();
-                Toast.makeText(MainActivity.this, "Sundargarh", Toast.LENGTH_SHORT).show();
-                Toast.makeText(MainActivity.this, "Staying at Banglore", Toast.LENGTH_SHORT).show();*/
+                    }
 
-                
+                    @Override
+                    public void onNext(List<StudentDetails> studentDetails) {
+                        pb.setVisibility(View.GONE);
+                        result.setVisibility(View.VISIBLE);
+                        result.setText(studentDetails != null ? studentDetails.toString() : null);
+                    }
 
-            }
+                    @Override
+                    public void onError(Throwable e) {
+                        Toast.makeText(MainActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
+                    }
 
-            @Override
-            public void onFailure(@NonNull Call<StudentDetails> call, @NonNull Throwable t) {
-                Toast.makeText(MainActivity.this, "There is an Error", Toast.LENGTH_SHORT).show();
-            }
-        });
+                    @Override
+                    public void onComplete() {
 
+                    }
+                });
     }
 }
